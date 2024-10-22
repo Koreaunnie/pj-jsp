@@ -30,7 +30,7 @@
 </div>
 
 <div>
-    <a href="board/edit?id=${board.id}">수정</a>
+    <a href="/board/edit?id=${board.id}">수정</a>
 </div>
 </body>
 </html>
