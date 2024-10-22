@@ -6,29 +6,56 @@
         display: flex;
     }
 
-    .navbar div {
+    .navbar .button {
         padding: 5px 10px;
         border: 1px solid #000;
     }
 
-    .navbar div:nth-child(1) {
-        border-radius: 10px 0 0 10px;
-    }
-
-    .navbar div:nth-child(2) {
-        border-radius: 0 10px 10px 0;
-    }
-
-    .navbar div a {
+    .button {
+        margin: 10px;
+        appearance: none;
+        background-color: #1A1A1A;
         text-decoration: none;
+        border-radius: 5px;
+        box-sizing: border-box;
+        cursor: pointer;
+        transition: all 300ms cubic-bezier(.23, 1, 0.32, 1);
+        touch-action: manipulation;
+        will-change: transform;
+    }
+
+    .button a {
+        color: #fff;
+    }
+
+    .button:hover {
+        background-color: transparent;
+        box-shadow: rgba(0, 0, 0, 0.25) 0 8px 15px;
+        transform: translateY(-2px);
+    }
+
+    .button:hover a {
+        color: #3B3B3B;
+    }
+
+    .success {
+        background: aliceblue;
     }
 </style>
 
 <div class="navbar">
-    <div>
+    <div class="button">
         <a href="/board/list">글 목록</a>
     </div>
-    <div>
+    <div class="button">
         <a href="/board/new">글 작성</a>
     </div>
+
+    <c:if test="${not empty message}">
+        <div class="${message.type}">
+            <h5>
+                    ${message.text}
+            </h5>
+        </div>
+    </c:if>
 </div>
