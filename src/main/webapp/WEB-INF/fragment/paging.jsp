@@ -5,12 +5,10 @@
         text-align: center;
         margin: 20px auto;
         width: 70%;
-        border: 1px solid blue;
     }
 
     .paging a {
         text-decoration: none;
-        border: 1px solid red;
     }
 
     .active {
