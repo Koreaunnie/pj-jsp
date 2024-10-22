@@ -44,4 +44,12 @@ public interface BoardMapper {
             WHERE id = #{id}
             """)
     void update(Board board);
+
+    @Select("""
+            SELECT *
+            FROM Board
+            ORDER BY id DESC
+            LIMIT #{offset}, 10
+            """)
+    List<Board> selectAllPaging(Integer offset);
 }

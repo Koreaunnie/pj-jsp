@@ -7,23 +7,23 @@
     <style>
         button {
             margin: 10px;
+            padding: 5px 10px;
             appearance: none;
             background-color: #1A1A1A;
+            border: 1px solid #989797;
             color: #fff;
             text-decoration: none;
             border-radius: 5px;
             box-sizing: border-box;
             cursor: pointer;
             transition: all 300ms cubic-bezier(.23, 1, 0.32, 1);
-            touch-action: manipulation;
-            will-change: transform;
         }
 
         button:hover {
             background-color: transparent;
             color: #3B3B3B;
             box-shadow: rgba(0, 0, 0, 0.25) 0 8px 15px;
-            transform: translateY(-2px);
+            transform: translateY(-1px);
         }
     </style>
 </head>

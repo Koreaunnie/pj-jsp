@@ -8,7 +8,7 @@
 
     .navbar .button {
         padding: 5px 10px;
-        border: 1px solid #000;
+        border: 1px solid #989797;
     }
 
     .button {
@@ -26,6 +26,7 @@
 
     .button a {
         color: #fff;
+        text-decoration: none;
     }
 
     .button:hover {
@@ -39,7 +40,15 @@
     }
 
     .success {
-        background: aliceblue;
+        color: darkblue;
+    }
+
+    .warning {
+        color: crimson;
+    }
+
+    .edited {
+        color: blueviolet;
     }
 </style>
 
@@ -50,12 +59,12 @@
     <div class="button">
         <a href="/board/new">글 작성</a>
     </div>
-
-    <c:if test="${not empty message}">
-        <div class="${message.type}">
-            <h5>
-                    ${message.text}
-            </h5>
-        </div>
-    </c:if>
 </div>
+
+<c:if test="${not empty message}">
+    <div class="${message.type}">
+        <h5>
+                ${message.text}
+        </h5>
+    </div>
+</c:if>
