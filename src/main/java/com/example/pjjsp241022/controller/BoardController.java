@@ -44,8 +44,54 @@ public class BoardController {
     @GetMapping("list")
     public void listBoard(@RequestParam(name = "page", defaultValue = "1") Integer page,
                           Model model) {
+        // 해당 페이지에 맞는 레코드 리스트 가져오기
         List<Board> list = service.list(page);
         model.addAttribute("boardList", list);
+
+        // 페이지 당 보여줄 레코드 수
+        int recordsPerPage = 10;
+
+        // 총 레코드 수
+        Integer numberOfRows = service.getTotalRecordCount();
+
+        // 총 페이지 수 (총 레코드 수 / 페이지당 레코드 수)
+        Integer totalPages = (int) Math.ceil((double) numberOfRows / recordsPerPage);
+
+        // 현재 페이지
+        Integer currentPage = page;
+
+        // 페이지 그룹의 끝 페이지 (1~10 페이지, 11~20 페이지 등의 그룹으로 나누기)
+        Integer endPage = (int) (Math.ceil((double) currentPage / 10)) * 10;
+
+        // 페이지 그룹의 시작 페이지
+        Integer beginPage = endPage - 9;
+
+        // 총 페이지 수가 현재 endPage보다 작으면 마지막 페이지로 endPage를 설정
+        if (endPage > totalPages) {
+            endPage = totalPages;
+        }
+
+        // 이전 페이지 그룹
+        Integer prevPage = (beginPage > 1) ? beginPage - 1 : 1;
+
+        // 다음 페이지 그룹
+        Integer nextPage = (endPage < totalPages) ? endPage + 1 : totalPages;
+
+        // 첫 페이지
+        Integer firstPage = 1;
+
+        // 마지막 페이지
+        Integer lastPage = totalPages;
+
+        // 모델에 추가
+        model.addAttribute("totalPages", totalPages);
+        model.addAttribute("currentPage", currentPage);
+        model.addAttribute("beginPage", beginPage);
+        model.addAttribute("endPage", endPage);
+        model.addAttribute("prevPage", prevPage);
+        model.addAttribute("nextPage", nextPage);
+        model.addAttribute("firstPage", firstPage);
+        model.addAttribute("lastPage", lastPage);
     }
 
     @GetMapping("view")

@@ -51,5 +51,7 @@
     </c:forEach>
     </tbody>
 </table>
+
+<c:import url="/WEB-INF/fragment/paging.jsp"/>
 </body>
 </html>

@@ -39,4 +39,8 @@ public class BoardService {
     public void update(Board board) {
         mapper.update(board);
     }
+
+    public Integer getTotalRecordCount() {
+        return mapper.count();
+    }
 }
