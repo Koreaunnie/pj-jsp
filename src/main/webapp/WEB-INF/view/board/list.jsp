@@ -18,6 +18,10 @@
         th:nth-child(2) {
             width: 50%;
         }
+
+        .active {
+            background: yellow;
+        }
     </style>
 </head>
 
@@ -54,8 +58,9 @@
 
 <%-- pagination --%>
 <div>
-    <c:forEach begin="1" end="${lastPageNumber}" var="pageNumber">
-        <a href="/board/list?page=${pageNumber}">${pageNumber}</a>
+    <c:forEach begin="${pageInfo.beginPageNumber}" end="${pageInfo.endPageNumber}" var="pageNumber">
+        <a class="${pageInfo.currentPageNumber == pageNumber ? 'active' : ''}"
+           href="/board/list?page=${pageNumber}">${pageNumber}</a>
     </c:forEach>
 </div>
 </body>

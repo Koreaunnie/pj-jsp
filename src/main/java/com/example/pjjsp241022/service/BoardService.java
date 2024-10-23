@@ -39,7 +39,23 @@ public class BoardService {
         // 마지막 페이지 번호
         Integer lastPageNumber = (countAll - 1) / 10 + 1;
 
-        map.put("lastPageNumber", lastPageNumber);
+        // 현재 페이지 기준 끝 페이지 번호
+        Integer endPageNumber = ((page - 1) / 10 + 1) * 10;
+
+        // 현재 페이지 기준 시작 페이지 번호
+        Integer beginPageNumber = endPageNumber - 9;
+
+        // 오른쪽 끝페이지는 마지막 페이지보다 클 수 없음
+        endPageNumber = Math.min(endPageNumber, lastPageNumber);
+
+        Map<String, Object> pageInfo = new HashMap<>();
+
+        pageInfo.put("beginPageNumber", beginPageNumber);
+        pageInfo.put("endPageNumber", endPageNumber);
+        pageInfo.put("lastPageNumber", lastPageNumber);
+        pageInfo.put("currentPageNumber", page);
+
+        map.put("pageInfo", pageInfo);
         map.put("boardList", list);
 
         return map;
