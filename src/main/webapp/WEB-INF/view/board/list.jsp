@@ -51,5 +51,12 @@
     </c:forEach>
     </tbody>
 </table>
+
+<%-- pagination --%>
+<div>
+    <c:forEach begin="1" end="15" var="pageNumber">
+        <a href="/board/list?page=${pageNumber}">${pageNumber}</a>
+    </c:forEach>
+</div>
 </body>
 </html>
