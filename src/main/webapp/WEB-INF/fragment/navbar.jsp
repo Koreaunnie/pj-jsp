@@ -1,70 +1,59 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 
-<style>
-    .navbar {
-        display: flex;
-    }
+<nav class="navbar bg-dark navbar-expand-lg bg-body-tertiary mb-4" data-bs-theme="dark">
+    <div class="container">
+        <a class="navbar-brand" href="/board/list">JSP게시판</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link ${param.active == 'list' ? 'active' : ''}" href="/board/list">
+                        <i class="fa-solid fa-list-ul"></i>
+                        목록
+                    </a>
+                </li>
 
-    .navbar .button {
-        padding: 5px 10px;
-        border: 1px solid #989797;
-    }
+                <li class="nav-item">
+                    <a class="nav-link ${param.active == 'new' ? 'active' : ''}" href="/board/new">
+                        <i class="fa-solid fa-file-pen"></i>
+                        작성
+                    </a>
+                </li>
 
-    .button {
-        margin: 10px;
-        appearance: none;
-        background-color: #1A1A1A;
-        text-decoration: none;
-        border-radius: 5px;
-        box-sizing: border-box;
-        cursor: pointer;
-        transition: all 300ms cubic-bezier(.23, 1, 0.32, 1);
-        touch-action: manipulation;
-        will-change: transform;
-    }
+                <li class="nav-item">
+                    <a href="/member/signup" class="nav-link">
+                        <i class="fa-solid fa-user"></i>
+                        회원가입
+                    </a>
+                </li>
 
-    .button a {
-        color: #fff;
-        text-decoration: none;
-    }
-
-    .button:hover {
-        background-color: transparent;
-        box-shadow: rgba(0, 0, 0, 0.25) 0 8px 15px;
-        transform: translateY(-2px);
-    }
-
-    .button:hover a {
-        color: #3B3B3B;
-    }
-
-    .success {
-        color: darkblue;
-    }
-
-    .warning {
-        color: crimson;
-    }
-
-    .edited {
-        color: blueviolet;
-    }
-</style>
-
-<div class="navbar">
-    <div class="button">
-        <a href="/board/list">글 목록</a>
+                <li class="nav-item">
+                    <a href="/member/list" class="nav-link">
+                        <i class="fa-solid fa-address-book"></i>
+                        회원목록
+                    </a>
+                </li>
+            </ul>
+        </div>
     </div>
-    <div class="button">
-        <a href="/board/new">글 작성</a>
-    </div>
-</div>
+</nav>
+
 
 <c:if test="${not empty message}">
-    <div class="${message.type}">
-        <h5>
-                ${message.text}
-        </h5>
+    <div class="container mb-4">
+        <div class="row justify-content-center">
+            <div class="col col-md-8 col-xl-6">
+                <div class="alert alert-${message.type} alert-dismissible fade show">
+                        ${message.text}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            </div>
+        </div>
     </div>
 </c:if>
+

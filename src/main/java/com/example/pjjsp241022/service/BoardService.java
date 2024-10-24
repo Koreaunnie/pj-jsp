@@ -77,12 +77,12 @@ public class BoardService {
         return map;
     }
 
-    public Board get(Integer id) {
-        return mapper.selectById(id);
-    }
-
     public void remove(Integer id) {
         mapper.deleteById(id);
+    }
+
+    public Board get(Integer id) {
+        return mapper.selectById(id);
     }
 
     public void update(Board board) {
