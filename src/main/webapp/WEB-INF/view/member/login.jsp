@@ -18,43 +18,28 @@
     <div class="row justify-content-center">
         <div class="col-12 col-md-9 col-lg-6">
 
-            <h2 class="my-3">${member.id}님 정보 수정</h2>
+            <h2 class="my-3">로그인</h2>
 
-            <form action="/member/edit" method="post">
+            <form method="post">
                 <div class="mb-3">
-                    <label for="inputId1" class="form-label">
-                        아이디
-                    </label>
-                    <input value="${member.id}" id="inputId1" readonly name="id" type="text" class="form-control">
+                    <label for="input1" class="form-label">아이디</label>
+                    <input type="text" id="input1" name="id" class="form-control">
                 </div>
 
                 <div class="mb-3">
-                    <label for="inputNickName1" class="form-label">
-                        별명
-                    </label>
-                    <input value="${member.nickName}" id="inputNickName1" name="nickName" type="text"
-                           class="form-control">
-                </div>
+                    <label for="input2" class="form-label">비밀번호</label>
+                    <input type="text" id="input2" name="password" class="form-control">
 
-                <div class="mb-3">
-                    <label for="textareaDescription1" class="form-label">
-                        자기소개
-                    </label>
-                    <textarea type="text"
-                              class="form-control"
-                              id="textareaDescription1"
-                              rows="10"
-                              name="description"
-                    >${member.description}</textarea>
                 </div>
 
                 <div class="mb-3">
                     <button class="btn btn-dark">
-                        <i class="fa-solid fa-floppy-disk"></i>
-                        저장
+                        <i class="fa-solid fa-right-to-bracket"></i>
+                        로그인
                     </button>
                 </div>
             </form>
+
         </div>
     </div>
 </div>

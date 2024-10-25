@@ -11,6 +11,7 @@
           integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
           crossorigin="anonymous" referrerpolicy="no-referrer"/>
 </head>
+
 <body>
 <c:import url="/WEB-INF/fragment/navbar.jsp"/>
 
@@ -18,36 +19,20 @@
     <div class="row justify-content-center">
         <div class="col-12 col-md-9 col-lg-6">
 
-            <h2 class="my-3">${member.id}님 정보 수정</h2>
+            <h2 class="my-3">
+                암호 변경
+            </h2>
 
-            <form action="/member/edit" method="post">
+            <form method="post">
+                <%--                div.mb-3*2>label.form-label+input.form-control--%>
                 <div class="mb-3">
-                    <label for="inputId1" class="form-label">
-                        아이디
-                    </label>
-                    <input value="${member.id}" id="inputId1" readonly name="id" type="text" class="form-control">
+                    <label for="input1" class="form-label">기존 암호</label>
+                    <input id="input1" name="oldPassword" type="text" class="form-control">
                 </div>
-
                 <div class="mb-3">
-                    <label for="inputNickName1" class="form-label">
-                        별명
-                    </label>
-                    <input value="${member.nickName}" id="inputNickName1" name="nickName" type="text"
-                           class="form-control">
+                    <label for="input2" class="form-label">새 암호</label>
+                    <input id="input2" name="newPassword" type="text" class="form-control">
                 </div>
-
-                <div class="mb-3">
-                    <label for="textareaDescription1" class="form-label">
-                        자기소개
-                    </label>
-                    <textarea type="text"
-                              class="form-control"
-                              id="textareaDescription1"
-                              rows="10"
-                              name="description"
-                    >${member.description}</textarea>
-                </div>
-
                 <div class="mb-3">
                     <button class="btn btn-dark">
                         <i class="fa-solid fa-floppy-disk"></i>
@@ -58,7 +43,6 @@
         </div>
     </div>
 </div>
-
 
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
         integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"

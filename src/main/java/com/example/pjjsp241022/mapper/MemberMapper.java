@@ -22,7 +22,7 @@ public interface MemberMapper {
     List<Member> selectAll();
 
     @Select("""
-            SELECT *
+            SELECT * 
             FROM member
             WHERE id = #{id}
             """)
@@ -36,11 +36,26 @@ public interface MemberMapper {
     int deleteByIdAndPassword(String id, String password);
 
     @Update("""
-                        UPDATE member
-                        SET password = #{password}, 
-                            nick_name = #{nickName}, 
-                            description = #{description}
+            UPDATE member
+            SET nick_name = #{nickName},
+                description = #{description}
             WHERE id = #{id}
             """)
-    void update(String id);
+    int update(Member member);
+
+    @Update("""
+            UPDATE member
+            SET password = #{newPassword}
+            WHERE id = #{id}
+            AND password = #{oldPassword}
+            """)
+    int updatePassword(String id, String oldPassword, String newPassword);
+
+    @Select("""
+            SELECT *
+            FROM member
+            WHERE id = #{id}
+            AND password = #{password}
+            """)
+    Member selectByIdAndPassword(String id, String password);
 }

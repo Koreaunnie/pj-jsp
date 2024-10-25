@@ -24,16 +24,9 @@
             <table class="table table-hover table-striped">
                 <thead class="table-dark">
                 <tr>
-                    <th>
-                        <i class="fa-solid fa-hashtag"></i>
-                    </th>
-                    <th class="w-60">제목</th>
-                    <th>
-                        <i class="fa-solid fa-user"></i>
-                    </th>
-                    <th class="d-none d-lg-table-cell">
-                        <i class="fa-regular fa-calendar"></i>
-                    </th>
+                    <th>아이디</th>
+                    <th class="w-60">별명</th>
+                    <th>가입일</th>
                 </tr>
                 </thead>
 

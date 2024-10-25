@@ -1,6 +1,9 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 
+<%-- 로그인 여부 --%>
+<c:set value="${not empty sessionScope.loggedInMember}" var="loggedIn"/>
+
 <nav class="navbar bg-dark navbar-expand-lg bg-body-tertiary mb-4" data-bs-theme="dark">
     <div class="container">
         <a class="navbar-brand" href="/board/list">JSP게시판</a>
@@ -18,26 +21,52 @@
                     </a>
                 </li>
 
-                <li class="nav-item">
-                    <a class="nav-link ${param.active == 'new' ? 'active' : ''}" href="/board/new">
-                        <i class="fa-solid fa-file-pen"></i>
-                        작성
-                    </a>
-                </li>
+                <c:if test="${loggedIn}">
+                    <li class="nav-item">
+                        <a class="nav-link ${param.active == 'new' ? 'active' : ''}" href="/board/new">
+                            <i class="fa-solid fa-file-pen"></i>
+                            작성
+                        </a>
+                    </li>
+                </c:if>
 
-                <li class="nav-item">
-                    <a href="/member/signup" class="nav-link">
-                        <i class="fa-solid fa-user"></i>
-                        회원가입
-                    </a>
-                </li>
+                <c:if test="${not loggedIn}">
+                    <li class="nav-item">
+                        <a href="/member/signup" class="nav-link">
+                            <i class="fa-solid fa-user"></i>
+                            회원가입
+                        </a>
+                    </li>
+                </c:if>
 
-                <li class="nav-item">
-                    <a href="/member/list" class="nav-link">
-                        <i class="fa-solid fa-address-book"></i>
-                        회원목록
-                    </a>
-                </li>
+
+                <c:if test="${loggedIn}">
+                    <li class="nav-item">
+                        <a href="/member/list" class="nav-link">
+                            <i class="fa-solid fa-address-book"></i>
+                            회원목록
+                        </a>
+                    </li>
+                </c:if>
+
+
+                <c:if test="${not loggedIn}">
+                    <li class="nav-item">
+                        <a href="/member/login" class="nav-link">
+                            <i class="fa-solid fa-right-to-bracket"></i>
+                            로그인
+                        </a>
+                    </li>
+                </c:if>
+
+                <c:if test="${loggedIn}">
+                    <li class="nav-item">
+                        <a href="/member/logout" class="nav-link">
+                            <i class="fa-solid fa-right-from-bracket"></i>
+                            로그아웃
+                        </a>
+                    </li>
+                </c:if>
             </ul>
         </div>
     </div>

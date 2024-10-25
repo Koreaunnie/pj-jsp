@@ -46,7 +46,7 @@
             </button>
 
             <button class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#editConfirmModal1">
-                <i class="fa-solid fa-floppy-disk"></i>
+                <i class="fa-solid fa-pen"></i>
                 수정
             </button>
 
@@ -93,7 +93,7 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">닫기</button>
                 <a class="btn btn-dark" href="/board/edit?id=${board.id}" type="button">
-                    <i class="fa-solid fa-floppy-disk"></i>
+                    <i class="fa-solid fa-pen"></i>
                     수정
                 </a>
             </div>

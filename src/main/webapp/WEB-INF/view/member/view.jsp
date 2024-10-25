@@ -26,13 +26,20 @@
             </div>
 
             <div class="mb-3">
-                <label for="inputPassword1" class="form-label">비밀번호</label>
-                <input value="${member.password}" id="inputPassword1" name="password" type="text" class="form-control"
-                       readonlyreadonly>
+                <label for="inputPassword1" class="form-label">
+                    암호
+                </label>
+                <div class="input-group">
+                    <input value="${member.password}" readonly id="inputPassword1" name="password" type="text"
+                           class="form-control">
+                    <a href="/member/edit-password?id=${member.id}" class="btn btn-outline-secondary">
+                        변경
+                    </a>
+                </div>
             </div>
 
             <div class="mb-3">
-                <label for="inputNickName1" class="form-label">닉네임</label>
+                <label for="inputNickName1" class="form-label">별명</label>
                 <input value="${member.nickName}" id="inputNickName1" name="nickName" type="text" class="form-control"
                        readonly>
             </div>
@@ -55,7 +62,7 @@
             </button>
 
             <button class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#editConfirmModal1">
-                <i class="fa-solid fa-floppy-disk"></i>
+                <i class="fa-solid fa-user-pen"></i>
                 수정
             </button>
         </div>
@@ -104,8 +111,8 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">닫기</button>
-                <a class="btn btn-dark" href="/member/edit?id=${board.id}" type="button">
-                    <i class="fa-solid fa-floppy-disk"></i>
+                <a class="btn btn-dark" href="/member/edit?id=${member.id}" type="button">
+                    <i class="fa-solid fa-user-pen"></i>
                     수정
                 </a>
             </div>
