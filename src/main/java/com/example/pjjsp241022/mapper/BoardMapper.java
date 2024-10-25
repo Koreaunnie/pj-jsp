@@ -40,8 +40,7 @@ public interface BoardMapper {
     @Update("""
             UPDATE Board
             SET title = #{title},
-                content = #{content},
-                writer = #{writer}
+                content = #{content}
             WHERE id = #{id}
             """)
     void update(Board board);

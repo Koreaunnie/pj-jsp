@@ -32,11 +32,6 @@
                               rows="10">${board.content}</textarea>
                 </div>
 
-                <div class="mb-3">
-                    <label for="inputWriter1" class="form-label">작성자</label>
-                    <input id="inputWriter1" class="form-control" type="text" name="writer" value="${board.writer}">
-                </div>
-
                 <button class="mb-3 btn btn-dark">
                     <i class="fa-solid fa-floppy-disk"></i>
                     저장
