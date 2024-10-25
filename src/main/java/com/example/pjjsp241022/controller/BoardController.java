@@ -96,14 +96,25 @@ public class BoardController {
     }
 
     @PostMapping("edit")
-    public String editBoard(Board board, RedirectAttributes rttr) {
+    public String editBoard(Board board,
+                            RedirectAttributes rttr,
+                            @SessionAttribute("loggedInMember") Member member) {
 
-        service.update(board);
+        try {
+            service.update(board, member);
 
-        rttr.addFlashAttribute("message", Map.of(
-                "type", "info",
-                "text", "게시물이 수정되었습니다."));
-        rttr.addAttribute("id", board.getId());
-        return "redirect:/board/view";
+            rttr.addFlashAttribute("message",
+                    Map.of("type", "success",
+                            "text", board.getId() + "번 게시물이 수정되었습니다."));
+            rttr.addAttribute("id", board.getId());
+            return "redirect:/board/view";
+        } catch (RuntimeException e) {
+            rttr.addFlashAttribute("message",
+                    Map.of("type", "danger",
+                            "text", board.getId() + "번 게시물이 수정중 문제가 발생하였습니다."));
+            rttr.addAttribute("id", board.getId());
+            return "redirect:/board/view";
+        }
+
     }
 }
