@@ -66,10 +66,14 @@
                     </li>
                 </c:if>
 
-                <li>
-                    <%-- TODO --%>
-                    ${sessionScope.loggedInMember.id}님이 로그인 하셨습니다.
-                </li>
+                <c:if test="${loggedIn}">
+                    <li class="nav-item">
+                        <a href="/member/view?id=${sessionScope.loggedInMember.id}" class="nav-link">
+                            <i class="fa-solid fa-user"></i>
+                                ${sessionScope.loggedInMember.id}
+                        </a>
+                    </li>
+                </c:if>
             </ul>
         </div>
     </div>

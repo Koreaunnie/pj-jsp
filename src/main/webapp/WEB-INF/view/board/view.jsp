@@ -49,12 +49,12 @@
                     <i class="fa-solid fa-trash-can"></i>
                     삭제
                 </button>
-            </c:if>
 
-            <button class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#editConfirmModal1">
-                <i class="fa-solid fa-pen"></i>
-                수정
-            </button>
+                <button class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#editConfirmModal1">
+                    <i class="fa-solid fa-pen"></i>
+                    수정
+                </button>
+            </c:if>
 
 
             <c:if test="${hashAccess}">

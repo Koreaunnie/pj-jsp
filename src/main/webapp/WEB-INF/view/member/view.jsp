@@ -14,6 +14,9 @@
 <body>
 <c:import url="/WEB-INF/fragment/navbar.jsp"/>
 
+<%-- 수정 / 삭제 권한 --%>
+<c:set value="${sessionScope.loggedInMember.id == member.id}" var="hasAccess"/>
+
 <div class="container">
     <div class="row justify-content-center">
         <div class="col col-12 col-md-9 col-lg-6">
@@ -56,69 +59,73 @@
                        readonly>
             </div>
 
-            <button class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#deleteConfirmModal1">
-                <i class="fa-solid fa-trash-can"></i>
-                탈퇴
-            </button>
-
-            <button class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#editConfirmModal1">
-                <i class="fa-solid fa-user-pen"></i>
-                수정
-            </button>
-        </div>
-    </div>
-</div>
-
-
-<!-- 삭제 button modal -->
-<div class="modal fade" id="deleteConfirmModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h1 class="modal-title fs-5">탈퇴 확인</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <form action="/member/delete" method="post" id="deleteForm1">
-                    <input type="hidden" name="id" value="${member.id}">
-                    <label for="inputPassword2" class="form-label">
-                        암호를 입력하세요.
-                    </label>
-                    <input class="form-control" type="text" name="password" id="inputPassword2">
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">닫기</button>
-                <button form="deleteForm1" class="btn btn-danger">
+            <c:if test="${hasAccess}">
+                <button class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#deleteConfirmModal1">
                     <i class="fa-solid fa-trash-can"></i>
                     탈퇴
                 </button>
-            </div>
+
+                <button class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#editConfirmModal1">
+                    <i class="fa-solid fa-user-pen"></i>
+                    수정
+                </button>
+            </c:if>
         </div>
     </div>
 </div>
 
-<!-- 수정 button modal -->
-<div class="modal fade" id="editConfirmModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h1 class="modal-title fs-5">수정 확인</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                아이디 ${member.id}님 정보를 수정하시겠습니까?
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">닫기</button>
-                <a class="btn btn-dark" href="/member/edit?id=${member.id}" type="button">
-                    <i class="fa-solid fa-user-pen"></i>
-                    수정
-                </a>
+<c:if test="hasAccess">
+    <!-- 삭제 button modal -->
+    <div class="modal fade" id="deleteConfirmModal1" tabindex="-1" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5">탈퇴 확인</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="/member/delete" method="post" id="deleteForm1">
+                        <input type="hidden" name="id" value="${member.id}">
+                        <label for="inputPassword2" class="form-label">
+                            암호를 입력하세요.
+                        </label>
+                        <input class="form-control" type="text" name="password" id="inputPassword2">
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">닫기</button>
+                    <button form="deleteForm1" class="btn btn-danger">
+                        <i class="fa-solid fa-trash-can"></i>
+                        탈퇴
+                    </button>
+                </div>
             </div>
         </div>
     </div>
-</div>
+
+    <!-- 수정 button modal -->
+    <div class="modal fade" id="editConfirmModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5">수정 확인</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    아이디 ${member.id}님 정보를 수정하시겠습니까?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">닫기</button>
+                    <a class="btn btn-dark" href="/member/edit?id=${member.id}" type="button">
+                        <i class="fa-solid fa-user-pen"></i>
+                        수정
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</c:if>
 
 
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
