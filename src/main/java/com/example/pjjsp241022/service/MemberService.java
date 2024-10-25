@@ -42,7 +42,17 @@ public class MemberService {
     }
 
     public Member get(String id, String password) {
-        return mapper.selectByIdAndPassword(id, password);
+        Member member = mapper.selectByIdAndPassword(id, password);
+
+        if (member == null) {
+            return null;
+        } else {
+            // 로그인 성공 됐을 때
+            List<String> authList = mapper.selectAuthById(id);
+            member.setAuth(authList);
+
+            return member;
+        }
     }
 
     public boolean hashAccess(String id, Member member) {

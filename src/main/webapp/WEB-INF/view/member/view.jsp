@@ -32,11 +32,14 @@
                 <label for="inputPassword1" class="form-label">
                     암호
                 </label>
+
                 <div class="input-group">
                     <input value="${member.password}" readonly id="inputPassword1" name="password" type="text"
                            class="form-control">
+                    <c:if test="${hasAccess}">
                     <a href="/member/edit-password?id=${member.id}" class="btn btn-outline-secondary">
                         변경
+                        </c:if>
                     </a>
                 </div>
             </div>

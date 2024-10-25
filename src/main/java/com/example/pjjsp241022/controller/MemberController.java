@@ -45,15 +45,15 @@ public class MemberController {
                        Model model,
                        RedirectAttributes rttr) {
 
-        if (member == null) {
-            // 로그인 안 한 상태
+        if (member != null && member.getAuth().contains("admin")) {
+            model.addAttribute("memberList", service.list());
+            return null;
+        } else {
             rttr.addFlashAttribute("message", Map.of(
                     "type", "danger",
-                    "text", "로그인 후 회원 목록 조회가 가능합니다."));
+                    "text", "관리자만 회원 목록 조회가 가능합니다."));
             return "redirect:/member/login";
-        } else {
-            model.addAttribute("memberList", service.list());
-            return "member/list";
+
         }
     }
 
@@ -151,17 +151,25 @@ public class MemberController {
     public String editPasswordProcess(String id,
                                       String oldPassword,
                                       String newPassword,
-                                      RedirectAttributes rttr) {
-        if (service.updatePassword(id, oldPassword, newPassword)) {
-            rttr.addFlashAttribute("message", Map.of(
-                    "type", "success",
-                    "text", "암호가 변경되었습니다."));
-            return "redirect:/member/view";
+                                      RedirectAttributes rttr,
+                                      @SessionAttribute("loggedInMember") Member member) {
+
+        if (service.hasAccess(id, member)) {
+            if (service.updatePassword(id, oldPassword, newPassword)) {
+                rttr.addFlashAttribute("message", Map.of(
+                        "type", "success",
+                        "text", "암호가 변경되었습니다."));
+                return "redirect:/member/list";
+            } else {
+                rttr.addFlashAttribute("message", Map.of(
+                        "type", "danger",
+                        "text", "암호가 일치하지 않습니다."));
+                return "redirect:/member/edit-password";
+            }
         } else {
-            rttr.addFlashAttribute("message", Map.of(
-                    "type", "danger",
-                    "text", "암호가 일치하지 않습니다."));
-            return "redirect:/member/edit-password";
+            rttr.addFlashAttribute("message", Map.of("type", "danger",
+                    "text", "권한이 없습니다."));
+            return "redirect:/member/list";
         }
     }
 

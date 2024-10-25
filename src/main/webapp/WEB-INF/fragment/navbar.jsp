@@ -3,6 +3,7 @@
 
 <%-- 로그인 여부 --%>
 <c:set value="${not empty sessionScope.loggedInMember}" var="loggedIn"/>
+<c:set value="${sessionScope.loggedInMember.auth.contains('admin')}" var="isAdmin"/>
 
 <nav class="navbar bg-dark navbar-expand-lg bg-body-tertiary mb-4" data-bs-theme="dark">
     <div class="container">
@@ -39,7 +40,7 @@
                     </li>
                 </c:if>
 
-                <c:if test="${loggedIn}">
+                <c:if test="${loggedIn && isAdmin}">
                     <li class="nav-item">
                         <a href="/member/list" class="nav-link">
                             <i class="fa-solid fa-address-book"></i>
