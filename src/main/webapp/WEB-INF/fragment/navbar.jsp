@@ -39,7 +39,6 @@
                     </li>
                 </c:if>
 
-
                 <c:if test="${loggedIn}">
                     <li class="nav-item">
                         <a href="/member/list" class="nav-link">
@@ -48,7 +47,6 @@
                         </a>
                     </li>
                 </c:if>
-
 
                 <c:if test="${not loggedIn}">
                     <li class="nav-item">
@@ -67,6 +65,11 @@
                         </a>
                     </li>
                 </c:if>
+
+                <li>
+                    <%-- TODO --%>
+                    ${sessionScope.loggedInMember.id}님이 로그인 하셨습니다.
+                </li>
             </ul>
         </div>
     </div>

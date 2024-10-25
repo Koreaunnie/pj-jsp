@@ -1,6 +1,7 @@
 package com.example.pjjsp241022.service;
 
 import com.example.pjjsp241022.dto.Board;
+import com.example.pjjsp241022.dto.Member;
 import com.example.pjjsp241022.mapper.BoardMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -17,8 +18,8 @@ public class BoardService {
 
     private final BoardMapper mapper;
 
-    public void add(Board board) {
-        mapper.insert(board);
+    public void add(Board board, Member member) {
+        mapper.insert(board, member);
     }
 
     public Map<String, Object> list(Integer page) {
@@ -77,8 +78,14 @@ public class BoardService {
         return map;
     }
 
-    public void remove(Integer id) {
-        mapper.deleteById(id);
+    public void remove(Integer id, Member member) {
+        Board board = mapper.selectById(id);
+        if (board.getWriter().equals(member.getId())) {
+            // 권한이 있을 때 지움
+            mapper.deleteById(id);
+        } else {
+            throw new RuntimeException("삭제 권한이 없습니다.");
+        }
     }
 
     public Board get(Integer id) {

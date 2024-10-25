@@ -14,6 +14,10 @@
 <body>
 <c:import url="/WEB-INF/fragment/navbar.jsp"/>
 
+<%-- 수정 / 삭제 권한 --%>
+<c:set value="${sessionScope.loggedInMember.id == board.writer}" var="hashAccess"/>
+
+
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-12 col-md-9 col-lg-6">
@@ -40,44 +44,52 @@
                 <input id="inputDate1" class="form-control" type="text" value="${board.inserted}" readonly>
             </div>
 
-            <button class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#deleteConfirmModal1">
-                <i class="fa-solid fa-trash-can"></i>
-                삭제
-            </button>
+            <c:if test="${hashAccess}">
+                <button class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#deleteConfirmModal1">
+                    <i class="fa-solid fa-trash-can"></i>
+                    삭제
+                </button>
+            </c:if>
 
             <button class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#editConfirmModal1">
                 <i class="fa-solid fa-pen"></i>
                 수정
             </button>
 
-            <form id="deleteForm1" action="/board/delete" method="post">
-                <input type="hidden" name="id" value="${board.id}">
-            </form>
+
+            <c:if test="${hashAccess}">
+                <form id="deleteForm1" action="/board/delete" method="post">
+                    <input type="hidden" name="id" value="${board.id}">
+                </form>
+            </c:if>
         </div>
     </div>
 </div>
 
 <!-- 삭제 button modal -->
-<div class="modal fade" id="deleteConfirmModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h1 class="modal-title fs-5">삭제 확인</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                ${board.id}번 게시물을 삭제하시겠습니까?
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">닫기</button>
-                <button form="deleteForm1" class="btn btn-danger">
-                    <i class="fa-solid fa-trash-can"></i>
-                    삭제
-                </button>
+<c:if test="${hashAccess}">
+    <div class="modal fade" id="deleteConfirmModal1" tabindex="-1" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5">삭제 확인</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                        ${board.id}번 게시물을 삭제하시겠습니까?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">닫기</button>
+                    <button form="deleteForm1" class="btn btn-danger">
+                        <i class="fa-solid fa-trash-can"></i>
+                        삭제
+                    </button>
+                </div>
             </div>
         </div>
     </div>
-</div>
+</c:if>
 
 <!-- 수정 button modal -->
 <div class="modal fade" id="editConfirmModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
