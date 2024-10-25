@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.Map;
@@ -39,8 +40,20 @@ public class MemberController {
     }
 
     @GetMapping("list")
-    public void list(Model model) {
-        model.addAttribute("memberList", service.list());
+    public String list(@SessionAttribute(value = "loggedInMember", required = false) Member member,
+                       Model model,
+                       RedirectAttributes rttr) {
+
+        if (member == null) {
+            // 로그인 안 한 상태
+            rttr.addFlashAttribute("message", Map.of(
+                    "type", "danger",
+                    "text", "로그인 후 회원 목록 조회가 가능합니다."));
+            return "redirect:/member/login";
+        } else {
+            model.addAttribute("memberList", service.list());
+            return "member/list";
+        }
     }
 
     @GetMapping("view")
