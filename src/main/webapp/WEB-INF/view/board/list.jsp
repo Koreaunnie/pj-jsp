@@ -91,8 +91,14 @@
     <ul class="pagination justify-content-center">
         <%-- 이전 버튼 --%>
         <c:if test="${pageInfo.hasPrevPage}">
+            <c:url value="/board/list" var="pageLink">
+                <c:param name="page" value="${pageInfo.prevPageNumber}}"/>
+                <c:param name="searchTarger" value="${param.searchTarger}"/>
+                <c:param name="keyword" value="${param.keyword}"/>
+            </c:url>
+
             <li class="page-item">
-                <a class="page-link" href="/board/list?page=${pageInfo.prevPageNumber}" aria-label="Previous">
+                <a class="page-link" href="${pageLink}" aria-label="Previous">
                     &laquo;
                 </a>
             </li>
@@ -104,17 +110,22 @@
                 <c:param name="searchTarger" value="${param.searchTarger}"/>
                 <c:param name="keyword" value="${param.keyword}"/>
             </c:url>
-            
+
             <li class="page-item">
                 <a class="page-link ${pageInfo.currentPageNumber == pageNumber ? 'active' : ''}"
-                   href="/board/list?page=${pageNumber}">${pageNumber}</a>
+                   href="${pageLink}">${pageNumber}</a>
             </li>
         </c:forEach>
 
         <%-- 다음 버튼 --%>
         <c:if test="${pageInfo.hasNextPage}">
+            <c:url value="/board/list" var="pageLink">
+                <c:param name="page" value="${pageInfo.nextPageNumber}}"/>
+                <c:param name="searchTarger" value="${param.searchTarger}"/>
+                <c:param name="keyword" value="${param.keyword}"/>
+            </c:url>
             <li class="page-item">
-                <a class="page-link" href="/board/list?page=${pageInfo.nextPageNumber}" aria-label="Next">
+                <a class="page-link" href="${pageLink}" aria-label="Next">
                     &raquo;
                 </a>
             </li>
