@@ -68,6 +68,9 @@ public class BoardController {
     public void viewBoard(Integer id, Model model) {
         Board board = service.get(id);
         model.addAttribute("board", board);
+
+//        간단하게 줄이기 (똑같은 코드)
+//        model.addAttribute("board", service.get(id));
     }
 
     @PostMapping("delete")
