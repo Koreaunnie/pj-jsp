@@ -99,6 +99,12 @@
         </c:if>
 
         <c:forEach begin="${pageInfo.beginPageNumber}" end="${pageInfo.endPageNumber}" var="pageNumber">
+            <c:url value="/board/list" var="pageLink">
+                <c:param name="page" value="${pageNumber}"/>
+                <c:param name="searchTarger" value="${param.searchTarger}"/>
+                <c:param name="keyword" value="${param.keyword}"/>
+            </c:url>
+            
             <li class="page-item">
                 <a class="page-link ${pageInfo.currentPageNumber == pageNumber ? 'active' : ''}"
                    href="/board/list?page=${pageNumber}">${pageNumber}</a>
