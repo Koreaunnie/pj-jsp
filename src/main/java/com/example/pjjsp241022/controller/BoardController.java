@@ -61,7 +61,6 @@ public class BoardController {
         // 한 페이지에 10개의 게시물
 
         Map<String, Object> result = service.list(page, searchTarget, keyword);
-
         model.addAllAttributes(result);
     }
 

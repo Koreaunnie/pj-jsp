@@ -63,9 +63,9 @@
 </div>
 
 <%-- 검색 form --%>
-<div class="container mb-3">
-    <form class="row justify-content-center">
-        <div class="col-2 col-lg-1">
+<div class="container">
+    <form class="row justify-content-center g-1">
+        <div class="col-auto">
             <select name="searchTarget" id="select1" class="form-select">
                 <option value="all">전체</option>
                 <option value="title" ${param.searchTarget == 'title' ? 'selected' : ''}>제목</option>
@@ -73,12 +73,10 @@
                 <option value="writer" ${param.searchTarget == 'writer' ? 'selected' : ''}>작성자</option>
             </select>
         </div>
-
-        <div class="col-4 col-lg-2">
+        <div class="col-6 col-md-4 col-lg-3">
             <input type="text" class="form-control" name="keyword" value="${param.keyword}">
         </div>
-
-        <div class="col-1">
+        <div class="col-auto">
             <button class="btn btn-outline-primary h-100">
                 <i class="fa-solid fa-magnifying-glass"></i>
             </button>
@@ -92,8 +90,8 @@
         <%-- 이전 버튼 --%>
         <c:if test="${pageInfo.hasPrevPage}">
             <c:url value="/board/list" var="pageLink">
-                <c:param name="page" value="${pageInfo.prevPageNumber}}"/>
-                <c:param name="searchTarger" value="${param.searchTarger}"/>
+                <c:param name="page" value="${pageInfo.prevPageNumber}"/>
+                <c:param name="searchTarget" value="${param.searchTarget}"/>
                 <c:param name="keyword" value="${param.keyword}"/>
             </c:url>
 
@@ -107,7 +105,7 @@
         <c:forEach begin="${pageInfo.beginPageNumber}" end="${pageInfo.endPageNumber}" var="pageNumber">
             <c:url value="/board/list" var="pageLink">
                 <c:param name="page" value="${pageNumber}"/>
-                <c:param name="searchTarger" value="${param.searchTarger}"/>
+                <c:param name="searchTarget" value="${param.searchTarget}"/>
                 <c:param name="keyword" value="${param.keyword}"/>
             </c:url>
 
@@ -120,8 +118,8 @@
         <%-- 다음 버튼 --%>
         <c:if test="${pageInfo.hasNextPage}">
             <c:url value="/board/list" var="pageLink">
-                <c:param name="page" value="${pageInfo.nextPageNumber}}"/>
-                <c:param name="searchTarger" value="${param.searchTarger}"/>
+                <c:param name="page" value="${pageInfo.nextPageNumber}"/>
+                <c:param name="searchTarget" value="${param.searchTarget}"/>
                 <c:param name="keyword" value="${param.keyword}"/>
             </c:url>
             <li class="page-item">

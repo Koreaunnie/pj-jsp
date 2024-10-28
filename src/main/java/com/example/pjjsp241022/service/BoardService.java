@@ -35,7 +35,7 @@ public class BoardService {
         // 페이지 관련 정보들
 
         // 총 레코드 수
-        Integer countAll = mapper.countAll();
+        Integer countAll = mapper.countAll(searchTarget, keyword);
 
         // 마지막 페이지 번호
         Integer lastPageNumber = (countAll - 1) / 10 + 1;
