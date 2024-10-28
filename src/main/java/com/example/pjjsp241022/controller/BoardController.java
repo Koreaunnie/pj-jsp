@@ -70,7 +70,7 @@ public class BoardController {
         Board board = service.get(id);
         model.addAttribute("board", board);
 
-//        간단하게 줄이기 (똑같은 코드)
+//        위랑 똑같은 코드 간단하게 줄이기
 //        model.addAttribute("board", service.get(id));
     }
 
