@@ -120,7 +120,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">닫기</button>
-                    <a class="btn btn-dark" href="/member/edit?id=${member.id}" type="button">
+                    <a class="btn btn-dark" href="/member/edit?id=${member.id}">
                         <i class="fa-solid fa-user-pen"></i>
                         수정
                     </a>

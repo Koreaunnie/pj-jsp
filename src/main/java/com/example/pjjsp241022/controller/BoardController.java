@@ -64,6 +64,7 @@ public class BoardController {
         model.addAllAttributes(result);
     }
 
+
     @GetMapping("view")
     public void viewBoard(Integer id, Model model) {
         Board board = service.get(id);

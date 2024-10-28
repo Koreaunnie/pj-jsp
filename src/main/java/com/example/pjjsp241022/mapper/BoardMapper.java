@@ -41,7 +41,7 @@ public interface BoardMapper {
             DELETE FROM Board
             WHERE id = #{id}
             """)
-    void deleteById(Integer id);
+    int deleteById(Integer id);
 
     @Update("""
             UPDATE Board
@@ -49,7 +49,7 @@ public interface BoardMapper {
                 content = #{content}
             WHERE id = #{id}
             """)
-    void update(Board board);
+    int update(Board board);
 
     @Select("""
             <script>
@@ -100,5 +100,5 @@ public interface BoardMapper {
             DELETE FROM Board
             WHERE writer = #{memberId}
             """)
-    void deleteByMemberId(String memberId);
+    int deleteByMemberId(String memberId);
 }
