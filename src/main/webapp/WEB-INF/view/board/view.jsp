@@ -36,7 +36,7 @@
 
             <div class="mb-3">
                 <label for="inputWriter1" class="form-label">작성자</label>
-                <input id="inputWriter1" class="form-control" type="text" value="${board.writer}" readonly>
+                <input id="inputWriter1" class="form-control" type="text" value="${board.writerNickName}" readonly>
             </div>
 
             <div class="mb-3">

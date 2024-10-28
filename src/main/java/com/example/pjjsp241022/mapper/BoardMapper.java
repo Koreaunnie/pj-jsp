@@ -25,9 +25,15 @@ public interface BoardMapper {
     List<Board> selectAll();
 
     @Select("""
-            SELECT *
-            FROM Board
-            WHERE id = #{id}
+            SELECT b.id,
+                   b.title,
+                   b.content,
+                   b.inserted,
+                   b.writer,
+                   m.nick_name writerNickName
+            FROM Board b JOIN Member m
+                    ON b.writer = m.id
+            WHERE b.id = #{id}
             """)
     Board selectById(Integer id);
 
@@ -47,20 +53,24 @@ public interface BoardMapper {
 
     @Select("""
             <script>
-                SELECT *
-                FROM Board
+                SELECT b.id,
+                       b.title,
+                       b.inserted,
+                       m.nick_name writerNickName
+                FROM Board b JOIN Member m
+                    ON b.writer = m.id
                 <trim prefix="WHERE" prefixOverrides="OR">
                     <if test="searchTarget == 'all' or searchTarget == 'title'">
-                        title LIKE CONCAT('%', #{keyword}, '%')
+                        b.title LIKE CONCAT('%', #{keyword}, '%')
                     </if>
                     <if test="searchTarget == 'all' or searchTarget == 'content'">
-                        OR content LIKE CONCAT('%', #{keyword}, '%')
+                        OR b.content LIKE CONCAT('%', #{keyword}, '%')
                     </if>
                     <if test="searchTarget == 'all' or searchTarget == 'writer'">
-                        OR writer LIKE CONCAT('%', #{keyword}, '%')
+                        OR m.nick_name LIKE CONCAT('%', #{keyword}, '%')
                     </if>
                 </trim>
-                ORDER BY id DESC
+                ORDER BY b.id DESC
                 LIMIT #{offset}, 10
             </script>
             """)
@@ -68,20 +78,27 @@ public interface BoardMapper {
 
     @Select("""
             <script>
-                SELECT COUNT(id)
-                FROM Board
+                SELECT COUNT(m.id)
+                FROM Board b JOIN Member m
+                    ON b.writer = m.id
                 <trim prefix="WHERE" prefixOverrides="OR">
                     <if test="searchTarget == 'all' or searchTarget == 'title'">
-                        title LIKE CONCAT('%', #{keyword}, '%')
+                        b.title LIKE CONCAT('%', #{keyword}, '%')
                     </if>
                     <if test="searchTarget == 'all' or searchTarget == 'content'">
-                        OR content LIKE CONCAT('%', #{keyword}, '%')
+                        OR b.content LIKE CONCAT('%', #{keyword}, '%')
                     </if>
                     <if test="searchTarget == 'all' or searchTarget == 'writer'">
-                        OR writer LIKE CONCAT('%', #{keyword}, '%')
+                        OR m.nick_name LIKE CONCAT('%', #{keyword}, '%')
                     </if>
                 </trim>
             </script>
             """)
     Integer countAll(String searchTarget, String keyword);
+
+    @Delete("""
+            DELETE FROM Board
+            WHERE writer = #{memberId}
+            """)
+    void deleteByMemberId(String memberId);
 }

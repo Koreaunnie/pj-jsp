@@ -8,7 +8,7 @@ import java.util.List;
 @Mapper
 public interface MemberMapper {
     @Insert("""
-            INSERT INTO member
+            INSERT INTO Member
             (id, password, nick_name, description)
             VALUES (#{id}, #{password}, #{nickName}, #{description})
             """)
@@ -16,27 +16,27 @@ public interface MemberMapper {
 
     @Select("""
             SELECT *
-            FROM member
+            FROM Member
             ORDER BY id
             """)
     List<Member> selectAll();
 
     @Select("""
             SELECT * 
-            FROM member
+            FROM Member
             WHERE id = #{id}
             """)
     Member selectById(String id);
 
     @Delete("""
-            DELETE FROM member
+            DELETE FROM Member
             WHERE id = #{id}
             AND password = #{password}
             """)
     int deleteByIdAndPassword(String id, String password);
 
     @Update("""
-            UPDATE member
+            UPDATE Member
             SET nick_name = #{nickName},
                 description = #{description}
             WHERE id = #{id}
@@ -44,7 +44,7 @@ public interface MemberMapper {
     int update(Member member);
 
     @Update("""
-            UPDATE member
+            UPDATE Member
             SET password = #{newPassword}
             WHERE id = #{id}
             AND password = #{oldPassword}
@@ -53,7 +53,7 @@ public interface MemberMapper {
 
     @Select("""
             SELECT *
-            FROM member
+            FROM Member
             WHERE id = #{id}
             AND password = #{password}
             """)
