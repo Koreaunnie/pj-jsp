@@ -22,7 +22,6 @@ public class MemberController {
 
     private final MemberService service;
 
-
     @GetMapping("signup")
     public void signup() {
 
@@ -70,7 +69,7 @@ public class MemberController {
                                RedirectAttributes rttr,
                                @SessionAttribute("loggedInMember") Member member) {
 
-        if (service.hashAccess(id, member)) {
+        if (service.hasAccess(id, member)) {
             if (service.remove(id, password)) {
                 // 탈퇴 성공
                 rttr.addFlashAttribute("message", Map.of(

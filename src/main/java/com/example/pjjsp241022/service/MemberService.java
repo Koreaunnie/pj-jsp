@@ -64,10 +64,6 @@ public class MemberService {
         }
     }
 
-    public boolean hashAccess(String id, Member member) {
-        return id.equals(member.getId());
-    }
-
     public boolean hasAccess(String id, Member member) {
         return id.equals(member.getId());
     }

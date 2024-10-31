@@ -15,7 +15,7 @@
 <c:import url="/WEB-INF/fragment/navbar.jsp"/>
 
 <%-- 수정 / 삭제 권한 --%>
-<c:set value="${sessionScope.loggedInMember.id == board.writer}" var="hashAccess"/>
+<c:set value="${sessionScope.loggedInMember.id == board.writer}" var="hasAccess"/>
 
 
 <div class="container">
@@ -44,7 +44,7 @@
                 <input id="inputDate1" class="form-control" type="text" value="${board.inserted}" readonly>
             </div>
 
-            <c:if test="${hashAccess}">
+            <c:if test="${hasAccess}">
                 <button class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#deleteConfirmModal1">
                     <i class="fa-solid fa-trash-can"></i>
                     삭제
@@ -57,7 +57,7 @@
             </c:if>
 
 
-            <c:if test="${hashAccess}">
+            <c:if test="${hasAccess}">
                 <form id="deleteForm1" action="/board/delete" method="post">
                     <input type="hidden" name="id" value="${board.id}">
                 </form>
@@ -67,7 +67,7 @@
 </div>
 
 <!-- 삭제 button modal -->
-<c:if test="${hashAccess}">
+<c:if test="${hasAccess}">
     <div class="modal fade" id="deleteConfirmModal1" tabindex="-1" aria-labelledby="exampleModalLabel"
          aria-hidden="true">
         <div class="modal-dialog">
